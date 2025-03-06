@@ -1,0 +1,35 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "logs\\success\\.72a43cb245ce39023ba04ae8141745d694b724f6-audit.json",
+    "files": [
+        {
+            "date": 1741168972891,
+            "name": "logs\\success\\ump-2025-03-05-16-success.log",
+            "hash": "b59867aca1cc693f472c28d8e5ae2606305cbf223d3da797669b5e8de74d186b"
+        },
+        {
+            "date": 1741173133483,
+            "name": "logs\\success\\ump-2025-03-05-17-success.log",
+            "hash": "75a50aa28172c16429f22a1d7f3127ebe9a7ebdf693c6034fefcc4a0c50e2667"
+        },
+        {
+            "date": 1741251424825,
+            "name": "logs\\success\\ump-2025-03-06-14-success.log",
+            "hash": "6e309f18dc8fdb2e4e276b6b315f5a33871132279f44c5d6f6287d44b00728cd"
+        },
+        {
+            "date": 1741251749850,
+            "name": "logs\\success\\ump-2025-03-06-15-success.log",
+            "hash": "cf9ccfc1dfc429e3ccfb4cf4124253e3078c966bdace8c35d06b3ca80ac59337"
+        },
+        {
+            "date": 1741255379570,
+            "name": "logs\\success\\ump-2025-03-06-16-success.log",
+            "hash": "57c3061fc830b36c5458ff76da88ab5a53db171a45be406fee09458b0202dfd0"
+        }
+    ],
+    "hashType": "sha256"
+}
