@@ -1,4 +1,4 @@
-export type IGenericMessage = {
+export interface IGenericErrorMessage {
   path: string;
-  message: number;
-};
+  message: string;
+}
