@@ -5,13 +5,13 @@ import handleValidationError from "../../../error/handleValidationError";
 
 import { IGenericErrorMessage } from "../../../interfaces/error";
 import ApiError from "../../../error/ApiError";
+import { errorLogger } from "../../../shared/logger";
 
-const globalErrorHandler: ErrorRequestHandler = (
-  err: any,
-  req,
-  res,
-  next
-) => {
+const globalErrorHandler: ErrorRequestHandler = (err: any, req, res, next) => {
+  config.env === "development"
+    ? console.log("globalErrorHandler", err)
+    : errorLogger.error("globalErrorHandler", err);
+
   let statusCode = 500;
   let message = "internal server error";
   let errorMessage: IGenericErrorMessage[] = [];
@@ -21,30 +21,27 @@ const globalErrorHandler: ErrorRequestHandler = (
     const simplifyError = handleValidationError(err);
     statusCode = simplifyError.statusCode;
     message = simplifyError.message;
-    errorMessage = simplifyError.errorMessages
+    errorMessage = simplifyError.errorMessages;
   } else if (err instanceof ApiError) {
     statusCode = err?.statusCode;
     message = err?.message;
     errorMessage = err?.message
       ? [
-        {
-          path: '',
-          message: err?.message,
-        },
-      ]
+          {
+            path: "",
+            message: err?.message,
+          },
+        ]
       : [];
-  }
-
-
-  else if (err instanceof Error) {
+  } else if (err instanceof Error) {
     message = err?.message;
     errorMessage = err?.message
       ? [
-        {
-          path: "",
-          message: err?.message,
-        },
-      ]
+          {
+            path: "",
+            message: err?.message,
+          },
+        ]
       : [];
   }
   res.status(statusCode).json({

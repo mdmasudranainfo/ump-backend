@@ -1,8 +1,11 @@
 import { NextFunction, Request, Response } from "express";
-import userService from "./user.service";
+import { userService } from "./user.service";
+import { z } from "zod";
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    // validate the request body
+
     // Create a new user with the received data
     const user = req.body;
     const newUser = await userService.createUser(user);
@@ -14,6 +17,6 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default {
+export const userController = {
   createUser,
 };

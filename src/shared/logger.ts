@@ -23,10 +23,7 @@ const logger = winston.createLogger({
   defaultMeta: { service: "user-service" },
   transports: [
     new winston.transports.Console(),
-    // new winston.transports.File({
-    //   filename: "logs/success.log",
-    //   level: "info",
-    // }),
+
     new DailyRotateFile({
       filename: "logs/success/ump-%DATE%-success.log",
       datePattern: "YYYY-MM-DD-HH",
@@ -48,10 +45,6 @@ const errorLogger = winston.createLogger({
   defaultMeta: { service: "user-service" },
   transports: [
     new winston.transports.Console(),
-    // new winston.transports.File({
-    //   filename: "logs/error.log",
-    //   level: "error",
-    // }),
 
     new DailyRotateFile({
       filename: "logs/error/ump-%DATE%-error.log",

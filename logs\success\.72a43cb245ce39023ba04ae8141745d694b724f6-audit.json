@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "logs\\success\\.72a43cb245ce39023ba04ae8141745d694b724f6-audit.json",
+    "files": [
+        {
+            "date": 1743158341984,
+            "name": "logs/success/ump-2025-03-28-16-success.log",
+            "hash": "425fa52c06ed90a80bf018f12f90f9186e7204a775acc62c1af52625dc7e98b6"
+        }
+    ],
+    "hashType": "sha256"
+}
