@@ -1,4 +1,4 @@
-type Month =
+export type Month =
   | "January"
   | "February"
   | "March"

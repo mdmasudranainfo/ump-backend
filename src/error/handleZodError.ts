@@ -11,7 +11,7 @@ const handleZodError = (err: ZodError) => {
   const statusCode = 400;
   return {
     statusCode,
-    message: "Bad Request",
+    message: "Zod Validation Error",
     errorMessages: errors,
   };
 };

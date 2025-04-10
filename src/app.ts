@@ -5,9 +5,10 @@ import cors from "cors";
 
 import globalErrorHandler from "./app/modules/middleware/globalErrorHandler";
 import { userRouter } from "./app/modules/user/user.route";
-import ApiError from "./error/ApiError";
+
 import ValidationRequest from "./app/modules/middleware/validateRequest";
 import { UserValidation } from "./app/modules/user/user.validation";
+import { academicSemesterRoute } from "./app/modules/AcademicSemester/AcademicSemester.route";
 
 // cors
 app.use(cors());
@@ -21,6 +22,8 @@ app.use(
   ValidationRequest(UserValidation.createUserValidatorZodSchema),
   userRouter
 );
+
+app.use("/api/v1/academic-semester/", academicSemesterRoute);
 
 app.get("/", async (req: Request, res: Response, next: NextFunction) => {
   next();
