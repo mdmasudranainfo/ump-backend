@@ -9,6 +9,7 @@ import { userRouter } from "./app/modules/user/user.route";
 import ValidationRequest from "./app/modules/middleware/validateRequest";
 import { UserValidation } from "./app/modules/user/user.validation";
 import { academicSemesterRoute } from "./app/modules/AcademicSemester/AcademicSemester.route";
+import router from "./app/routes";
 
 // cors
 app.use(cors());
@@ -17,13 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // application
-app.use(
-  "/api/v1/users/",
-  ValidationRequest(UserValidation.createUserValidatorZodSchema),
-  userRouter
-);
 
-app.use("/api/v1/academic-semester/", academicSemesterRoute);
+app.use("/api/v1", router);
 
 app.get("/", async (req: Request, res: Response, next: NextFunction) => {
   next();
