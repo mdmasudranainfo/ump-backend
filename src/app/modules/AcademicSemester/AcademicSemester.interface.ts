@@ -14,7 +14,7 @@ export type Month =
 
 interface IAcademicSemester {
   title: "Autumn" | "Fall" | "Summer";
-  year: number;
+  year: string;
   code: "01" | "02" | "03";
   startMonth: Month;
   endMonth: Month;

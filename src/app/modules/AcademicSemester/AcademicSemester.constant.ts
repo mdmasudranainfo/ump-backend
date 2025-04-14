@@ -20,3 +20,10 @@ export const academicSemesterTitleCodeMapper: { [key: string]: string } = {
   Summer: "02",
   Fall: "03",
 };
+
+export type IFilters = {
+  searchTerm?: string;
+  title?: string;
+  year?: string;
+  code?: string;
+};

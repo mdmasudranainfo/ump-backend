@@ -1,6 +1,9 @@
 import status from "http-status";
 import ApiError from "../../../error/ApiError";
-import { academicSemesterTitleCodeMapper } from "./AcademicSemester.constant";
+import {
+  academicSemesterTitleCodeMapper,
+  IFilters,
+} from "./AcademicSemester.constant";
 import IAcademicSemester from "./AcademicSemester.interface";
 import AcademicSemester from "./AcademicSemester.model";
 import { IPaginationOptions } from "../../../interfaces/IPaginationOptions";
@@ -19,6 +22,7 @@ const createAcademicSemester = async (
 };
 
 const getAllAcademicSemesters = async (
+  filters: IFilters,
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<IAcademicSemester[]>> => {
   const { page, limit, skip, sortBy, sortOrder } =
@@ -31,8 +35,66 @@ const getAllAcademicSemesters = async (
     sortConditions[sortBy] = sortOrder;
   }
 
+  // search
+  const { searchTerm, ...filtersData } = filters;
+
+  const academicSemesterSearchableFields = ["title", "code", "year"];
+
+  const andConditions = [];
+
+  if (searchTerm) {
+    andConditions.push({
+      $or: academicSemesterSearchableFields.map((field) => ({
+        [field]: {
+          $regex: searchTerm,
+          $options: "i", // case-insensitive search
+        },
+      })),
+    });
+  }
+
+  if (Object.keys(filtersData).length) {
+    andConditions.push({
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: {
+          $regex: value,
+          $options: "i", // case-insensitive search
+        },
+      })),
+    });
+  }
+
+  // const andConditions = [
+  //   {
+  //     $or: [
+  //       {
+  //         title: {
+  //           $regex: searchTerm,
+  //           $options: "i",
+  //         },
+  //       },
+  //       {
+  //         code: {
+  //           $regex: searchTerm,
+  //           $options: "i",
+  //         },
+  //       },
+  //       {
+  //         year: {
+  //           $regex: searchTerm,
+  //           $options: "i",
+  //         },
+  //       },
+  //     ],
+  //   },
+  // ];
+
   // query
-  const result = await AcademicSemester.find()
+
+  //
+
+  //
+  const result = await AcademicSemester.find({ $and: andConditions })
     .sort(sortConditions)
     .skip(skip)
     .limit(limit);
@@ -48,8 +110,29 @@ const getAllAcademicSemesters = async (
   };
 };
 
+const getSingleAcademicSemester = async (
+  id: string
+): Promise<IAcademicSemester | null> => {
+  const result = await AcademicSemester.findById(id);
+
+  return result;
+};
+
+const updateAcademicSemester = async (
+  id: string,
+  payload: Partial<IAcademicSemester>
+): Promise<IAcademicSemester | null> => {
+  const result = await AcademicSemester.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
+
+  return result;
+};
+
 //
 export const AcademicSemesterService = {
   createAcademicSemester,
   getAllAcademicSemesters,
+  getSingleAcademicSemester,
+  updateAcademicSemester,
 };

@@ -31,9 +31,11 @@ const getAllAcademicSemesters = catchAsync(async (req, res, next) => {
   // };
 
   const paginationOptions = pick(req.query, paginationFills);
+  const filters = pick(req.query, ["searchTerm", "title", "code", "year"]);
 
   // pagination start end
   const result = await AcademicSemesterService.getAllAcademicSemesters(
+    filters,
     paginationOptions
   );
 
@@ -44,7 +46,41 @@ const getAllAcademicSemesters = catchAsync(async (req, res, next) => {
   });
 });
 
+const getSingleAcademicSemester = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const result = await AcademicSemesterService.getSingleAcademicSemester(id);
+
+    sendResponse(res, {
+      statusCode: status.OK,
+      success: true,
+      message: "Academic semester retrieved successfully",
+      data: result,
+    });
+  }
+);
+
+const updateAcademicSemester = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const data = req.body;
+    const result = await AcademicSemesterService.updateAcademicSemester(
+      id,
+      data
+    );
+
+    sendResponse(res, {
+      statusCode: status.OK,
+      success: true,
+      message: "Academic semester updated successfully",
+      data: result,
+    });
+  }
+);
+
 export const AcademicSemesterController = {
   createAcademicSemester,
   getAllAcademicSemesters,
+  getSingleAcademicSemester,
+  updateAcademicSemester,
 };
