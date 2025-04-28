@@ -6,9 +6,9 @@
     "auditLog": "logs\\error\\.073249296d2a379d74c67a81dd008bd091c8d9ea-audit.json",
     "files": [
         {
-            "date": 1744698462713,
-            "name": "logs/error/ump-2025-04-15-12-error.log",
-            "hash": "307a0b7d3794104b04a78a6ccb9bfe58f6792786019de19b6aea3a01f52c5240"
+            "date": 1745845687898,
+            "name": "logs/error/ump-2025-04-28-19-error.log",
+            "hash": "37e331285b68a2473c9ad1aa03b6bda9f8ac14aaec89efcda9a9f4bd8c99d8c3"
         }
     ],
     "hashType": "sha256"
